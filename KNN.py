@@ -7,20 +7,23 @@ import getopt
 import os
 import math
 
-def getNeighbors(trainingSet, testInstance, k):
+
+def getNeighbors(trainingData, testTemp, k):
     distances = []
-    length = len(testInstance) - 1
-    for i in range(len(trainingSet)):
+    length = len(testTemp) - 1
+    for i in range(len(trainingData)):
         distance = 0
-        for j in range(len(testInstance)):
-            distance += (testInstance[j]-trainingSet[i][j])**2
+        for j in range(len(testTemp)):
+            distance += (testTemp[j]-trainingData[i][j])**2
         dist = distance
-        distances.append((trainingSet[i], dist))
-    distances.sort()
+        print(dist)
+        distances.append((trainingData[i], dist))
+    distances.sort(key = operator.itemgetter(1))
     neighbors = []
     for i in range(k):
         neighbors.append(distances[i][0])
     return neighbors
+
 
 
 def main(argv):
@@ -63,15 +66,17 @@ def main(argv):
         pure_data.pop()
         data_array.append(pure_data)
 
-    sample_size = len(data_array)
+    train_array = data_array[:len(data_array)//2]
+    test_array = data_array[len(data_array)//2+1:]
 
+    sample_size = len(test_array)
+
+    predictions = []
     k = 11
-    for i in range(sample_size):
-        neighbors = getNeighbors(data_array, data_array[i], k)
-
-    for i in range(11):
-        ofile.write(str(neighbors[i]))
-        ofile.write("\n")
+    for i in range(200):
+        neighbors = getNeighbors(train_array, test_array[i], k)
+        
+    ofile.write(str(neighbors))
     ofile.close()
     
 if __name__ == "__main__":
