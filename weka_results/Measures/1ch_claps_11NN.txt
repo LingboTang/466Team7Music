@@ -1,0 +1,42 @@
+﻿=== Run information ===
+
+Scheme:weka.classifiers.lazy.IBk -K 11 -W 0 -A "weka.core.neighboursearch.LinearNNSearch -A \"weka.core.EuclideanDistance -R first-last\""
+Relation:     MARSYAS_EMPTYclaps.arff
+Instances:    13856
+Attributes:   125
+[list of attributes omitted]
+Test mode:10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+IB1 instance-based classifier
+using 11 nearest neighbour(s) for classification
+
+
+Time taken to build model: 0.02 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances       12323               88.9362 %
+Incorrectly Classified Instances      1533               11.0638 %
+Kappa statistic                          0.4552
+Mean absolute error                      0.1917
+Root mean squared error                  0.2902
+Relative absolute error                 77.7438 %
+Root relative squared error             82.6659 %
+Total Number of Instances            13856     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.971     0.596      0.906     0.971     0.938      0.886    0
+                 0.404     0.029      0.701     0.404     0.513      0.886    1
+Weighted Avg.    0.889     0.514      0.877     0.889     0.876      0.886
+
+=== Confusion Matrix ===
+
+     a     b   <-- classified as
+ 11517   344 |     a = 0
+  1189   806 |     b = 1
+

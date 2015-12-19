@@ -1,0 +1,29 @@
+Kea - Machine Learning in Marsyas ala Weka
+Mode = train_evaluate
+Training classifier using .arff file: MARSYAS_EMPTYmulti.arff
+Classifier type : SVM
+=== Non-Stratified cross-validation (10 folds) ===
+[MRS_MESSAGE] === ClassificationReport ===
+
+Correctly Classified Instances		18724	68.9904 %
+Incorrectly Classified Instances	8416	31.0096 %
+Kappa statistic				0.458789	
+Mean absolute error			0.310096
+Root mean squared error			0.556862
+Relative absolute error			62.0192
+Root relative squared error		111.372
+Total Number of Instances		27140
+
+=== Confusion Matrix ===
+
+	a	b	c	d	e	f	g	h	<-- classified as
+	---------------------------------------------------------------------------------------------
+	209	0	8	41	125	0	5	526	| a = 0 Vocals, Drums, Claps
+	0	0	31	3	2	0	0	1	| b = 1 Drums, Claps
+	0	1	1490	398	67	0	10	152	| c = 2 Drums
+	12	1	170	2314	64	0	15	913	| d = 3 None
+	78	0	157	166	489	0	32	1752	| e = 4 Vocals, Drums
+	0	0	1	5	0	0	0	3	| f = 5 Claps
+	30	0	3	58	50	0	329	2678	| g = 6 Vocals, Claps
+	24	0	44	539	145	0	106	13893	| h = 7 Vocals
+68% classified correctly (18724/27140)
