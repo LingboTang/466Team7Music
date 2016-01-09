@@ -16,7 +16,6 @@ def getNeighbors(trainingData, testTemp, k):
         for j in range(len(testTemp)):
             distance += (testTemp[j]-trainingData[i][j])**2
         dist = distance
-        print(dist)
         distances.append((trainingData[i], dist))
     distances.sort(key = operator.itemgetter(1))
     neighbors = []
@@ -24,7 +23,23 @@ def getNeighbors(trainingData, testTemp, k):
         neighbors.append(distances[i][0])
     return neighbors
 
+def getResponse(neighbors):
+    classVotes = {}
+    for i in range(len(neighbors)):
+        response = neighbors[i][-1]
+        if response in classVotes:
+            classVotes[response] += 1
+        else:
+            classVotes[response] = 1
+        sortedVotes = sorted(classVotes.items(), key = operator.itemgetter(1))
+        return sortedVotes[0][0]
 
+def getAccuracy(testData, predictions):
+    correct = 0
+    for x in range(len(testData)):
+        if testData[x][-1] == predictions[x]:
+            correct += 1
+    return (correct/float(len(testData))) * 100
 
 def main(argv):
     
@@ -73,10 +88,13 @@ def main(argv):
 
     predictions = []
     k = 11
-    for i in range(200):
+    for i in range(sample_size):
         neighbors = getNeighbors(train_array, test_array[i], k)
-        
-    ofile.write(str(neighbors))
+        result = getResponse(neighbors)
+        predictions.append(result)
+        print('> predicted=' + repr(result) + ', actual=' + repr(test_array[i][-1]))
+
+    accuracy = getAccuracy(test_array, predictions)
     ofile.close()
     
 if __name__ == "__main__":
